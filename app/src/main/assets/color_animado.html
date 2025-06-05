@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+          background: transparent;
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+          touch-action: none;
+        }
+
+        .circulo-color {
+          width: 240px;
+          height: 240px;
+          border-radius: 50%;
+          background-color: rgba(180, 180, 180, 0.6);
+          position: fixed;
+          top: 60%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(0);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+          animation: entrada 0.8s ease-out forwards, flotar 3s ease-in-out infinite alternate;
+          transition: transform 0.2s ease;
+          z-index: 10;
+        }
+
+        @keyframes entrada {
+          0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+          100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        @keyframes flotar {
+          0%   { transform: translate(-50%, -50%) scale(1); }
+          100% { transform: translate(-50%, -52%) scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="circulo-color" id="figuraColor"></div>
+
+<script>
+    const figura = document.getElementById("figuraColor");
+    const params = new URLSearchParams(window.location.search);
+    const color = params.get("color");
+
+    const colores = {
+      rojo: "#E53935",
+      azul: "#1E88E5",
+      celeste: "#4FC3F7",
+      amarillo: "#FDD835",
+      verde: "#43A047",
+      naranja: "#FB8C00",
+      morado: "#8E24AA",
+      rosado: "#EC407A",
+      "rosado fuerte": "#D81B60",
+      negro: "#212121",
+      blanco: "#FAFAFA",
+      gris: "#BDBDBD",
+      marron: "#8D6E63"
+    };
+
+    const colorClave = color?.toLowerCase();
+    if (colorClave && colores[colorClave]) {
+      figura.style.backgroundColor = colores[colorClave];
+    } else {
+      figura.style.backgroundColor = "#CCCCCC"; // fallback
+    }
+</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background: transparent;
+          height: 100%;
+          width: 100%;
+        }
+
+        .letra-3d {
+          font-size: 260px;
+          font-weight: 900;
+          color: #FF5722;
+          position: absolute;
+          top: 70%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-shadow:
+            0 1px 0 #ccc,
+            0 2px 0 #bbb,
+            0 3px 0 #aaa,
+            0 4px 0 #999,
+            0 5px 0 #888,
+            0 6px 0 #777,
+            0 7px 2px rgba(0,0,0,0.5),
+            0 10px 10px rgba(0,0,0,0.3);
+
+          filter: drop-shadow(0 8px 10px rgba(0,0,0,0.25));
+          animation: flotar 2.5s ease-in-out infinite, giro 8s linear infinite;
+        }
+
+        @keyframes flotar {
+          0%, 100% {
+            transform: translate(-50%, -50%) scale(1);
+          }
+          50% {
+            transform: translate(-50%, -53%) scale(1.08);
+          }
+        }
+
+        @keyframes giro {
+          0% { rotate: x 0deg; }
+          50% { rotate: x 8deg; }
+          100% { rotate: x 0deg; }
+        }
+    </style>
+</head>
+<body>
+<div class="letra-3d" id="letra">A</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const vocal = params.get("vocal");
+    if (vocal) {
+      document.getElementById("letra").textContent = vocal.toUpperCase();
+    }
+</script>
+</body>
+</html>
+
+
+

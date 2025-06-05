@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="vocal_u" size="5.000000 5.545024" />
+    <ImageTarget name="vocal_o" size="5.000000 5.389610" />
+    <ImageTarget name="vocal_i" size="5.000000 8.422330" />
+    <ImageTarget name="vocal_e" size="5.000000 5.865385" />
+    <ImageTarget name="vocal_a" size="5.000000 5.765766" />
+  </Tracking>
+</QCARConfig>

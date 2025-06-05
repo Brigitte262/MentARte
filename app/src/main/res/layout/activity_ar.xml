@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Cámara en tiempo real -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Encabezado superior de ScreenOperacion-->
+    <TextView
+        android:id="@+id/textoEncabezado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Suma / Resta"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/background_con_borde"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Resultado de operación -->
+    <TextView
+        android:id="@+id/textoResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detectando..."
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/background_con_borde"
+        android:padding="10dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textoEncabezado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <!-- Modelo 3D -->
+    <WebView
+        android:id="@+id/webviewModelo"
+        android:layout_width="0dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/textoResultado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/transparent"/>
+
+    <!-- Botón de regreso con imagen -->
+    <FrameLayout
+        android:id="@+id/botonRegresar"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/boton"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Regresar"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <!-- Colores -->
+
+     <TextView
+         android:id="@+id/debugHSV"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="HSV: -"
+         android:textSize="14sp"
+         android:textColor="@android:color/white"
+         android:background="#66000000"
+         android:padding="6dp"
+         app:layout_constraintTop_toBottomOf="@id/textoResultado"
+         app:layout_constraintStart_toStartOf="parent"
+         android:layout_marginTop="8dp" />
+
+
+
+
+
+
+
+
+
+
+ </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .imagen-verdura {
+            width: 280px;
+            height: auto;
+            object-fit: contain;
+            animation: zoomYFlotar 2.5s ease-in-out forwards;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+        }
+
+        @keyframes zoomYFlotar {
+            0% {
+                transform: scale(0.4) translateY(0px);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05) translateY(-6px);
+            }
+            100% {
+                transform: scale(1) translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<img id="imagenVerdura" class="imagen-verdura" src="" alt="Verdura" />
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get("verdura"); // sigue usando "fruta" porque así se pasa desde la app
+    const imagen = document.getElementById("imagenVerdura");
+
+    if (nombre) {
+        const nombreLimpio = nombre
+            .toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // quita acentos
+            .replace(/ñ/g, "n"); // reemplaza ñ manualmente
+        imagen.src = `ver_${nombreLimpio}.png`;
+    } else {
+        imagen.style.display = "none";
+    }
+</script>
+
+</body>
+</html>

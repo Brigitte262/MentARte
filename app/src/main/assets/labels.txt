@@ -1,0 +1,15 @@
+perro
+gato
+pajaro
+caballo
+elefante
+leon
+tigre
+pez
+oso
+mono
+conejo
+vaca
+gallina
+pato
+sapo

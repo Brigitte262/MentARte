@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "690953195491",
+    "project_id": "apptea-3c098",
+    "storage_bucket": "apptea-3c098.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690953195491:android:b9e4df435cf060761d1ad6",
+        "android_client_info": {
+          "package_name": "com.app.tea.aprendejugando"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNTS81G7JtKPt55pktoZh6hWt44w08afE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+          background: transparent;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .imagen-saludo {
+          max-width: 90%;
+          height: auto;
+          object-fit: contain;
+          animation: zoomYFlotar 2.5s ease-in-out forwards;
+          filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+        }
+
+        @keyframes zoomYFlotar {
+          0% { transform: scale(0.4) translateY(0px); opacity: 0; }
+          50% { transform: scale(1.05) translateY(-6px); opacity: 1; }
+          100% { transform: scale(1) translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+<img id="imagenSaludo" class="imagen-saludo" src="" alt="Saludo" />
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get("saludo");
+    const imagen = document.getElementById("imagenSaludo");
+
+    if (nombre) {
+      const nombreLimpio = nombre
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // elimina acentos
+        .replace(/ñ/g, "n"); // reemplaza ñ
+
+      imagen.src = `saludo_${nombreLimpio}.png`;
+    } else {
+      imagen.style.display = "none";
+    }
+</script>
+
+</body>
+</html>
+

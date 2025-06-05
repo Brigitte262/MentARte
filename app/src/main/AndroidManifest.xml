@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.app.tea.aprendejugando">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AprendeJugando"
+        tools:targetApi="31">
+
+        <!-- 👇 Esta será la primera pantalla que se abre al lanzar la app -->
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- 👇 Tu actividad principal (se lanza después del splash) -->
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AprendeJugando" />
+
+        <!-- Otras actividades -->
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.RegistroExitosoActivity" />
+        <activity android:name=".ui.RegistroEmergenteActivity" />
+        <activity android:name=".ui.MenuCursosActivity" />
+        <activity android:name=".ui.ScreenComunicacion" />
+        <activity android:name=".ui.ScreenContenidoComunicacion" />
+        <activity android:name=".ui.ScreenVocales" />
+        <activity android:name=".ui.ScreenOCR"/>
+        <activity android:name=".ui.ScreeMatematica" />
+        <activity android:name=".ui.ScreenContenidoMatematica" />
+        <activity android:name=".ui.ScreenNumeros" />
+        <activity android:name=".ui.ScreenOCRNumeros" />
+        <activity android:name=".ui.ScreenAbecedario" />
+        <activity android:name=".ui.ScreenOCRAbecedario"/>
+        <activity android:name=".ui.SreenCiencia" />
+        <activity android:name=".ui.ScreenContenidoCiencia"/>
+        <activity android:name=".ui.ScreenAnimales" />
+        <activity android:name=".ui.AnimalActivity" />
+        <activity android:name=".ui.ScreenFrutas" />
+        <activity android:name=".ui.FrutasARActivity" />
+        <activity android:name=".ui.ScreenHabilidades" />
+        <activity android:name=".ui.ScreenContenidoHabilidades" />
+        <activity android:name=".ui.ScreenEmociones" />
+        <activity android:name=".ui.EmocionARActivity" />
+        <activity android:name=".ui.ScreenSaludos" />
+        <activity android:name=".ui.SaludoActivity" />
+        <activity android:name=".ui.ScreenRutinas" />
+        <activity android:name=".ui.RutinaActivity" />
+        <activity android:name=".ui.ScreenMeses" />
+        <activity android:name=".ui.ScreenOCRMeses" />
+        <activity android:name=".ui.ScreenOperaciones" />
+        <activity android:name=".ui.OperacionActivity" />
+        <activity android:name=".ui.ScreenColores" />
+        <activity android:name=".ui.ColorActivity" />
+        <activity android:name=".ui.ScreenVerdura" />
+        <activity android:name=".ui.VerduraActivity" />
+
+    </application>
+</manifest>
+
