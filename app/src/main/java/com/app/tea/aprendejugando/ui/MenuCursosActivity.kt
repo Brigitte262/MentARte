@@ -12,6 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import android.content.Intent
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import com.app.tea.aprendejugando.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,21 +42,53 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 // Sombra (shadow) desde Foundation
 import androidx.compose.ui.draw.shadow
+import java.util.Locale
 
 
-class MenuCursosActivity : ComponentActivity() {
+class MenuCursosActivity : ComponentActivity(), TextToSpeech.OnInitListener {
+    private lateinit var tts: TextToSpeech
+    private lateinit var nombre: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val nombre = intent.getStringExtra("nombreUsuario") ?: "Usuario"
+        nombre = intent.getStringExtra("nombreUsuario") ?: "amigo"
+
+        // Inicializa TextToSpeech
+        tts = TextToSpeech(this, this)
 
         setContent {
             AprendeJugandoTheme {
-                MenuCursosScreen(nombre = nombre) // ✅ Aquí le pasas el nombre correctamente
+                MenuCursosScreen(nombre = nombre)
             }
         }
     }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            // Español latino para mayor calidez
+            val result = tts.setLanguage(Locale("es", "MX")) // Puedes probar "es", "PE" si está disponible
+
+            if (result == TextToSpeech.LANG_AVAILABLE || result == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
+                tts.setPitch(1.1f)         // ⭐ tono más agudo (1.0 es normal)
+                tts.setSpeechRate(0.92f)   // ⭐ más lento y claro
+
+                val mensaje = "¡Qué alegría tenerte aquí, $nombre! Vamos a divertirnos aprendiendo."
+                tts.speak(mensaje, TextToSpeech.QUEUE_FLUSH, null, null)
+            } else {
+                Log.e("TTS", "Idioma no disponible")
+            }
+        }
+    }
+
+
+    override fun onDestroy() {
+        tts.stop()
+        tts.shutdown()
+        super.onDestroy()
+    }
 }
+
 
 @Composable
 fun MenuCursosScreen(nombre: String) {
@@ -97,7 +131,7 @@ fun MenuCursosScreen(nombre: String) {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "¡Bienvenido, $nombre!",
+                    text = "¡Bienvenido/a, $nombre!",
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp

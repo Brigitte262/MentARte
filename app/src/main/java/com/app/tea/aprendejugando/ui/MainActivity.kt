@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
+import com.airbnb.lottie.compose.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -298,15 +299,21 @@ fun LoginScreen(
 
 
 @Composable
-fun MagicWelcomeDialog(
-    nombreUsuario: String,
-    onDismiss: () -> Unit
-) {
+fun MagicWelcomeDialog(nombreUsuario: String, onDismiss: () -> Unit) {
     val visible = remember { mutableStateOf(true) }
+
+    // ✅ Cargar la animación desde assets
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec.Asset("magic_wand.lottie") // usa el nuevo nombre aquí
+    )
+    val progress by animateLottieCompositionAsState(
+        composition = composition,
+        iterations = LottieConstants.IterateForever
+    )
 
     AnimatedVisibility(
         visible = visible.value,
-        enter = fadeIn(animationSpec = tween(500)) + scaleIn(initialScale = 0.85f),
+        enter = fadeIn(tween(500)) + scaleIn(initialScale = 0.85f),
         exit = fadeOut()
     ) {
         AlertDialog(
@@ -317,7 +324,15 @@ fun MagicWelcomeDialog(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("✨", fontSize = 38.sp, modifier = Modifier.padding(bottom = 8.dp))
+                    // ✨ Animación mágica
+                    LottieAnimation(
+                        composition = composition,
+                        progress = { progress },
+                        modifier = Modifier
+                            .height(120.dp)
+                            .padding(bottom = 8.dp)
+                    )
+
                     Text(
                         text = "¡Bienvenido/a $nombreUsuario!",
                         fontWeight = FontWeight.Bold,
@@ -336,17 +351,15 @@ fun MagicWelcomeDialog(
                     modifier = Modifier.fillMaxWidth()
                 )
             },
-            shape = RoundedCornerShape(24.dp),
             containerColor = Color(0xFFFFF2CC),
             tonalElevation = 8.dp,
-            modifier = Modifier
-                .padding(24.dp)
+            shape = RoundedCornerShape(24.dp),
+            modifier = Modifier.padding(24.dp)
         )
     }
 
-    // Redirección automática
     LaunchedEffect(Unit) {
-        delay(2500)
+        delay(5000)
         visible.value = false
         onDismiss()
     }

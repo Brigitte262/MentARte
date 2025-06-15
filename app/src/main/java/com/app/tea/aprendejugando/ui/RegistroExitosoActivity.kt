@@ -21,6 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 
 
@@ -28,52 +33,54 @@ class RegistroExitosoActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("RegistroExitoso", "✅ Entraste a RegistroExitosoActivity")
-
         val nombre = intent.getStringExtra("nombre") ?: "Usuario"
 
         setContent {
             AprendeJugandoTheme {
-                RegistroExitosoPantalla(nombre) {
-                    startActivity(Intent(this, MenuCursosActivity::class.java)) // O la pantalla que quieras
-                    finish()
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color(0xFFFFF9F0)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            imageVector = Icons.Default.Check,
+                            contentDescription = null,
+                            tint = Color(0xFF4CAF50),
+                            modifier = Modifier.size(80.dp)
+                        )
+
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        Text(
+                            text = "¡Bienvenido, $nombre!",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF5D4037)
+                        )
+
+                        Text(
+                            text = "Tu cuenta ha sido creada exitosamente.",
+                            fontSize = 16.sp,
+                            color = Color(0xFF5D4037)
+                        )
+
+                        Spacer(modifier = Modifier.height(36.dp))
+
+                        Button(
+                            onClick = {
+                                val intent = Intent(this@RegistroExitosoActivity, MenuCursosActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7DBB8A))
+                        ) {
+                            Text("Comenzar")
+                        }
+                    }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun RegistroExitosoPantalla(nombre: String, onFinalizar: () -> Unit) {
-    // Espera 2.5 segundos y redirige
-    LaunchedEffect(Unit) {
-        delay(2500)
-        onFinalizar()
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFFFF2CC)),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("🎉", fontSize = 48.sp)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "¡Registro exitoso!",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF5D4037)
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Bienvenido/a $nombre a la aventura mágica 🧚",
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                color = Color(0xFF444444),
-                modifier = Modifier.padding(horizontal = 24.dp)
-            )
         }
     }
 }

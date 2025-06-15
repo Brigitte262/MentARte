@@ -10,14 +10,16 @@ object EmocionDetector {
 
     // 🎨 Colores representativos para cada emoción
     private val coloresReferencia = listOf(
-        ResultadoColor("Feliz", 254, 176, 47),          // Amarillo
-        ResultadoColor("Triste", 100, 160, 230),        // Azul claro
-        ResultadoColor("Enojado", 220, 60, 60),         // Rojo fuerte
-        ResultadoColor("Neutro", 170, 170, 170),        // Gris claro
-        ResultadoColor("Sorprendido", 200, 100, 60),    // Naranja
-        ResultadoColor("Asustado", 100, 170, 130),      // celeste pálido
-        ResultadoColor("Amoroso", 255, 150, 190)        // Rosa
+        ResultadoColor("Feliz", 254, 200, 50),          // Más brillante (amarillo)
+        ResultadoColor("Triste", 80, 140, 200),         // Azul más oscuro
+        ResultadoColor("Enojado", 180, 40, 40),         // Rojo más oscuro
+        ResultadoColor("Neutro", 170, 170, 170),        // Igual
+        ResultadoColor("Sorprendido", 250, 120, 70),    // Más saturado para distanciarlo del rojo
+        ResultadoColor("Asustado", 90, 200, 160),       // Más verdoso para distinguirlo del azul
+        ResultadoColor("Amoroso", 255, 160, 210) // antes: (255, 150, 190)
+        // Igual (rosado)
     )
+
 
     fun detectarColorDominante(bitmap: Bitmap): ResultadoColor {
         val centerX = bitmap.width / 2
@@ -48,14 +50,17 @@ object EmocionDetector {
         val avgB = totalB / count
 
         val colorDetectado = coloresReferencia.minByOrNull {
-            val dr = it.r - avgR
-            val dg = it.g - avgG
-            val db = it.b - avgB
-            Math.sqrt((dr * dr + dg * dg + db * db).toDouble())
+            val isRojoFuerte = it.nombre == "Enojado" || it.nombre == "Sorprendido"
+            val dr = if (isRojoFuerte) (it.r - avgR) * 1.2 else (it.r - avgR).toDouble()
+            val dg = (it.g - avgG).toDouble()
+            val db = (it.b - avgB).toDouble()
+            Math.sqrt((dr * dr + dg * dg + db * db))
         }
+
 
         return colorDetectado ?: ResultadoColor("Desconocido", avgR, avgG, avgB)
     }
+
 
     fun detectarEmocion(bitmap: Bitmap): String {
         val color = detectarColorDominante(bitmap)

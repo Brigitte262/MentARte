@@ -112,6 +112,10 @@ dependencies {
     implementation("com.google.mlkit:text-recognition:16.0.0")
     implementation ("com.google.mlkit:image-labeling:17.0.7")
 
+    implementation("com.airbnb.android:lottie-compose:6.1.0")
+
+
+
 
 
 
