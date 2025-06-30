@@ -170,7 +170,7 @@ fun RegisterScreen(
     errorMessage: String?,
     showSuccessDialog: Boolean = false,
     onDismissSuccessDialog: () -> Unit = {},
-    onTestPopup: () -> Unit = {} // ✅ nuevo parámetro
+    onTestPopup: () -> Unit = {}
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
@@ -206,7 +206,8 @@ fun RegisterScreen(
                     .shadow(8.dp, shape = RoundedCornerShape(16.dp))
                     .background(Color(0xFFFFF9F0), shape = RoundedCornerShape(16.dp))
                     .padding(innerPadding)
-                    .fillMaxWidth(if (isTablet) 0.6f else 1f),
+                    .fillMaxWidth(if (isTablet) 0.6f else 1f)
+                    .heightIn(max = 480.dp), // 👈 esto limita el alto
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -232,17 +233,29 @@ fun RegisterScreen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Button(
-                    onClick = onTestPopup, // ✅ ahora usa esto para mostrar el diálogo
+                    onClick = onRegisterClick,
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7DBB8A)),
                     shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .shadow(elevation = 6.dp, shape = RoundedCornerShape(8.dp))
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp), // 👈 cambio aquí
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Verificar Credenciales", color = Color.White)
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Button(
+                    onClick = onTestPopup,
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7DBB8A)),
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp), // 👈 cambio aquí
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Registrarme", color = Color.White)
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
+
 
                 TextButton(onClick = onNavigateToLogin) {
                     Text("¿Ya tienes cuenta? Inicia sesión", color = Color.Gray)
